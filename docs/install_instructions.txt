@@ -1,0 +1,8 @@
+conda create -n ML-4-DC-POC -c conda-forge python=3.7 numpy pandas ipykernel dash dash-bootstrap-components plotly
+
+conda activate ML-4-DC-POC
+
+pip install fuzzy
+pip install levenshtein
+
+python -m ipykernel install --user --name ML-4-DC-POC
