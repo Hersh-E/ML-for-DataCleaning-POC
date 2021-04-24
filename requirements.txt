@@ -1,1 +1,11 @@
 
+numpy
+dash
+pandas
+plotly
+gunicorn
+dash-bootstrap-components
+fuzzy
+Levenshtein
+names
+scikit-learn
