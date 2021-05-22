@@ -21,11 +21,12 @@ import fuzzy
 import Levenshtein as lev
 import names as name_gen
 
+app = dash.Dash("ML for Data Cleaning: A POC", external_stylesheets=[dbc.themes.YETI], suppress_callback_exceptions=True, external_scripts=['https://platform.linkedin.com/badges/js/profile.js'])
+
 from tabs.overview import overview
 from tabs.example_view import example_view
 from tabs.considerations_view import considerations
-
-app = dash.Dash("ML for Data Cleaning: A POC", external_stylesheets=[dbc.themes.YETI], suppress_callback_exceptions=True)
+from tabs.about_view import about
 
 server = app.server
 
@@ -49,14 +50,16 @@ app.layout = dbc.Container([
 			dbc.Tab(label="Overview", tab_id="overview"),
 			dbc.Tab(label="Example", tab_id="example"),
 			dbc.Tab(label="Considerations", tab_id="considerations"),
+			dbc.Tab(label="About", tab_id="about"),
 		], id='tabs', active_tab="overview"),
 		html.Hr(className="m-0 p-0 fluid", style={'padding':0}),
 	]),
 	# Info Cards
 	dbc.Container([], id="content", style={'padding':0}, className="tab-content"),
 	# hidden div to hold the name data
-	html.Div(id='name-list', style={'display':'none'})
-
+	html.Div(id='name-list', style={'display':'none'}),
+	# <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+	# html.Script(src="https://platform.linkedin.com/badges/js/profile.js", defer=True, type="text/javascript", **{'async':True, })
 ])
 
 @app.callback([Output("content", "children")], [Input("tabs", "active_tab")])
@@ -67,7 +70,8 @@ def switch_tab(at):
 		content = example_view
 	elif at == "considerations":
 		content = considerations
-
+	elif at == "about":
+		content = about
 	return [content]
 
 # @app.callback(Output("input-name","children"),[Input("submit-name", "n_clicks"), State("entered-name", "value")])
@@ -89,7 +93,11 @@ def update_cluster_graph(n1, n2, name, namelist_json):
 		namelist = pd.read_json(namelist_json, orient='split').reset_index()
 
 		results_df, matches = cluster_func(name, namelist)
-		fig = px.scatter(results_df, x='x', y='y', color='hue', hover_data=['FirstName', 'LastName'])
+
+		fig = px.scatter(results_df, x='x', y='y', color='hue', size='size', hover_data={'x':False, 'y':False, 'hue':False, 'size':False, 'FirstName':True, 'LastName':True})
+
+		fig.update_xaxes(fixedrange=True, visible=False)
+		fig.update_yaxes(fixedrange=True, visible=False)
 
 		if matches == 1:
 			response = 'You\'re too unique!'
@@ -124,3 +132,7 @@ if __name__ == '__main__':
 
 	app.run_server(debug=True, processes=1, threaded=True, host='127.0.0.1', port=8050, use_reloader=False)
 	# app.run_server
+
+
+dir(dbc)
+dir(html)

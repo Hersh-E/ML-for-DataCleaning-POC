@@ -32,7 +32,7 @@ overview = html.Div([
                     to upper/lower/proper case.
                     """]),
             ]),
-        ], className="col-lg p-2 mb-lg-0 mb-2"),
+        ], className="col-lg p-2 mb-2"),
         dbc.Card([
             dbc.CardBody([
                 html.H4("Distance Scores", className="card-title"),
@@ -44,7 +44,7 @@ overview = html.Div([
                     a monumental task for 1 soundex algorithm. So.... GO CRAZY WITH SOUNDEX ALGORITHMS!
                     """]),
             ]),
-        ], className="col-lg p-2 mb-lg-0 mb-2"),
+        ], className="col-lg p-2 mb-2"),
         dbc.Card([
             dbc.CardBody([
                 html.H4("Clustering", className="card-title"),
@@ -55,6 +55,6 @@ overview = html.Div([
                     appropriate matches.
                     """]),
             ]),
-        ], className="col-lg p-2 mb-lg-0 mb-2"),
+        ], className="col-lg p-2 mb-2"),
     ],),
 ])

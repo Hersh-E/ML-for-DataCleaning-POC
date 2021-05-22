@@ -61,8 +61,9 @@ def cluster_func(name, PeopleVerse):
     pca = PCA(n_components = 2)
     PeopleVerse[['x', 'y']] = pd.DataFrame(pca.fit_transform(PeopleVerse[fit_on]),columns=['x','y'])
     PeopleVerse['hue'] = PeopleVerse['Cluster'].apply(lambda x: 'you' if x == cluster else 'everyone else')
+    PeopleVerse['size'] = PeopleVerse['Cluster'].apply(lambda x: 5 if x == cluster else 1)
 
-    return [PeopleVerse[['FirstName', 'LastName', 'x', 'y', 'hue']], matches]
+    return [PeopleVerse[['FirstName', 'LastName', 'x', 'y', 'hue', 'size']], matches]
 
 
 
@@ -72,7 +73,20 @@ def cluster_func(name, PeopleVerse):
 #     'LastName' : [name_gen.get_last_name() for x in range(50)]})
 #
 # results_df, matches = cluster_func(name, namelist)
-# fig = px.scatter(results_df, x='x', y='y', color='hue', hover_data=['FirstName', 'LastName'])
-# fig
+# fig = px.scatter(results_df, x='x', y='y', color='hue', size='size', custom_data=['FirstName', 'LastName'])
 #
+# fig.update_traces(hovertemplate='%{custom_data[0]} %{custom_data[1]}')
+#
+# fig
+# 
 # import plotly.express as px
+#
+#
+# dir(fig)
+#
+# fig.data[1]
+# fig.update_traces(marker=dict(size=12,
+#                               line=dict(width=2,
+#                                         color='DarkSlateGrey')),
+#                   selector=dict(mode='markers'))
+# fig
