@@ -130,9 +130,5 @@ def generate_values(namelist_json):
 
 if __name__ == '__main__':
 
-	app.run_server(debug=True, processes=1, threaded=True, host='127.0.0.1', port=8050, use_reloader=False)
-	# app.run_server
-
-
-dir(dbc)
-dir(html)
+	# app.run_server(debug=True, processes=1, threaded=True, host='127.0.0.1', port=8050, use_reloader=False)
+	app.run_server
