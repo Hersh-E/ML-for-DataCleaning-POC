@@ -1,7 +1,7 @@
 
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 
 overview = html.Div([
     dbc.Row([
@@ -50,7 +50,7 @@ overview = html.Div([
                 html.H4("Clustering", className="card-title"),
                 html.P(["""
                     The last step where the machine makes a decision for us. This involves clustering the names based on the various editted distances.
-                    The clusters will be random/ so you need to include the name you are looking for in the list. This leaves us with a target whos editted
+                    The clusters will be random, so you need to include the name you are looking for in the list. This leaves us with a target whos editted
                     distances are all 0 because it is an exact match. This also gives us a point of reference to find our cluster that would indicate
                     appropriate matches.
                     """]),
